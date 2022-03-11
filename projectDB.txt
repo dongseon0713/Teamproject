@@ -1,0 +1,55 @@
+::User
+create table member (
+    id varchar(30) not null primary key,
+    pw varchar(30) not null,
+    name varchar(30) not null,
+    nickname varchar(30) unique not null,
+    gender varchar(6) check( gender IN('남','여')),
+    address varchar(30) not null,
+    email varchar(40) not null,
+    emailAd varchar(30) not null,
+    phone varchar(3) default '010' not null ,
+    phone1 int not null check(phone1 between 1111 and 9999),
+    phone2 int not null check(phone2 between 1111 and 9999),
+    question varchar(10) not null,
+    answer varchar(50) not null,
+    regdate Timestamp default sysdate
+);
+
+::회원 탈퇴 테이블
+create table unregister (
+    reason varchar(10) not null,
+    cause varchar(500)
+);
+
+::Board
+create table board (
+    name varchar(200) not null,
+    address varchar(300) not null,
+    carpark varchar(1) check (carpark='Y' and carpark='N' and carpark='U'),
+    open int check (open between 0 and 24),
+    close int check (close between 0 and 24),
+    breaktime int check(breaktime between 0 and 24),
+    lastorder int check(lastorder between 0 and 24),
+    holiday varchar(3),
+    writer varchar(10) not null,
+    city_b varchar(20) not null,
+    city_s varchar(100) not null,
+    title varchar(50) not null,
+    content varchar(100) not null,
+    Img varchar(200),
+    ThumbImg varchar(200),
+    regdate Timestamp default sysdate
+);
+
+
+
+
+::Comment
+create table comment_info (
+    num int not null,
+    writer varchar(10) not null,
+    content varchar(100) not null,
+    regdate Timestamp default sysdate,
+    FOREIGN key (num) REFERENCES board(num)
+);
