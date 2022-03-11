@@ -37,8 +37,8 @@ create table board (
     city_s varchar(100) not null,
     title varchar(50) not null,
     content varchar(100) not null,
-    Img varchar(200),
-    ThumbImg varchar(200),
+    gdsImg varchar(200),
+    gdsThumbImg varchar(200),
     regdate Timestamp default sysdate
 );
 
