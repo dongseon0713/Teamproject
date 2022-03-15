@@ -24,9 +24,11 @@ create table unregister (
 
 ::Board
 create table board (
+    num int default BOARD_11.nextval primary key,
+    hit int default 0,
     name varchar(200) not null,
     address varchar(300) not null,
-    carpark varchar(1) check (carpark='Y' and carpark='N' and carpark='U'),
+    carpark varchar(1) check (carpark='Y' or carpark='N' or carpark='U'),
     open int check (open between 0 and 24),
     close int check (close between 0 and 24),
     breaktime int check(breaktime between 0 and 24),
@@ -34,7 +36,6 @@ create table board (
     holiday varchar(3),
     writer varchar(10) not null,
     city_b varchar(20) not null,
-    city_s varchar(100) not null,
     title varchar(50) not null,
     content varchar(100) not null,
     gdsImg varchar(200),
@@ -51,5 +52,11 @@ create table comment_info (
     writer varchar(10) not null,
     content varchar(100) not null,
     regdate Timestamp default sysdate,
-    FOREIGN key (num) REFERENCES board(num)
 );
+
+
+::Counter
+create table counter  (
+    num int default 0 primary key,
+    sessionID varchar(100) unique
+)
